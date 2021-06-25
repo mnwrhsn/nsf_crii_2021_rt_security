@@ -1,0 +1,129 @@
+
+% Insert colors
+\input{color_defines}
+
+% Some definitions to make life easier %
+
+\newcommand{\da}{\downarrow}
+\newcommand{\la}{\leftarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\lla}{\longleftarrow}
+\newcommand{\llra}{\longleftrightarrow}
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\Lla}{\Longleftarrow}
+\newcommand{\Llra}{\Longleftrightarrow}
+\newcommand{\Lra}{\Longrightarrow}
+\newcommand{\ua}{\uparrow}
+
+\newcommand{\nea}{\nearrow}
+\newcommand{\nwa}{\nwarrow}
+\newcommand{\sea}{\searrow}
+\newcommand{\swa}{\swarrow}
+
+\newcommand{\mf}{\mathbf}
+\newcommand{\mc}{\mathcal}
+%\newcommand{\ul}{\underline}
+\newcommand{\ol}{\overline}
+
+\newcommand{\eg}{{e.g.,}\xspace}
+\newcommand{\viz}{{viz.,}\xspace}
+\newcommand{\Eg}{{E.g., }}
+\newcommand{\etal}{{et~al.}\xspace}
+\newcommand{\ie}{{i.e.,}\xspace}
+\newcommand{\etc}{{etc.}}
+\newcommand{\ci}{{\it (i) }}
+\newcommand{\cii}{{\it (ii) }}
+\newcommand{\ciii}{{\it (iii) }}
+\newcommand{\civ}{{\it (iv) }}
+\newcommand{\cv}{{\it (v) }}
+\newcommand{\cvi}{{\it (vi) }}
+\newcommand{\cvii}{{\it (vii) }}
+\newcommand{\ca}{{\it (a) }}
+\newcommand{\cb}{{\it (b) }}
+\newcommand{\cc}{{\it (c) }}
+\newcommand{\cd}{{\it (d) }}
+\newcommand{\ce}{{\it (e) }}
+\newcommand{\cf}{{\it (f) }}
+\newcommand{\cg}{{\it (g) }}
+\newcommand{\ch}{{\it (h) }}
+%\newcommand{\ci}{{\it (i) }}
+\newcommand{\cj}{{\it (j) }}
+\newcommand{\ck}{{\it (k) }}
+\newcommand{\cl}{{\it (l) }}
+\newcommand{\cm}{{\it (m) }}
+\newcommand{\cn}{{\it (n) }}
+\newcommand{\co}{{\it (o) }}
+\newcommand{\cp}{{\it (p) }}
+\newcommand{\cq}{{\it (q) }}
+% \newcommand{\note}{{\bf Note: }}
+
+
+% no hyphen in paragaph segmentation
+\hyphenpenalty=8000
+\exhyphenpenalty=8000
+\sloppy
+
+% research task counter
+\newcounter{rtaskno}
+\newcommand{\rtask}{%
+\textbf{TASK~\stepcounter{rtaskno}\thertaskno.}\xspace}
+
+\newcounter{rqno}
+\newcommand{\rqs}[1]{\refstepcounter{rqno}\therqno\label{#1}}
+
+%% reference spacing
+%\let\OLDthebibliography\thebibliography
+%\renewcommand\thebibliography[1]{
+%	\OLDthebibliography{#1}
+%	\setlength{\parskip}{0pt}
+%	\setlength{\itemsep}{0pt plus 0.3ex}
+%}
+
+% custom table width
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+
+% change Figure to Fig.
+%\renewcommand{\figurename}{Fig.}
+
+% remove spacing between floats and text
+\setlength{\textfloatsep}{0pt}
+\setlength{\dbltextfloatsep}{0pt}
+\setlength{\intextsep}{0cm}
+\setlength{\textfloatsep}{0cm}
+
+% circled text
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,fill,inner sep=2pt] (char) {\textcolor{white}{#1}};}}
+
+
+
+% paragraph spacing
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+                                      {0.3em}%{3.25ex \@plus1ex \@minus.2ex}%
+                                      {-1em}%
+                                      {\normalfont\normalsize\bfseries}}
+\makeatother
+
+
+%a few commands to highlight issues in the proposal (\TODO, \CHECK, \DummyText)
+\RequirePackage{color}
+\definecolor{RED}{rgb}{1,0,0}
+\definecolor{BLUE}{rgb}{0,0,1}
+\definecolor{White}{rgb}{1,1,1}
+\providecommand{\TODO}[1]{{\protect\color{red}\noindent {\bf [TODO]}\emph{#1} {\bf [/TODO]}}}
+\providecommand{\todo}[1]{{\protect\color{darkred}\noindent {\bf [TODO]}~\emph{#1} \par }}
+\providecommand{\CHECK}[1]{{\protect\color{blue} #1 (check) }}
+\providecommand{\DummyText}[1]{{\protect\color{white} #1}}
+
+\newcommand{\degrees}{$\!\!$\char23$\!$}
+
+% left alighed bibliography number
+\makeatletter
+\renewcommand{\@biblabel}[1]{[#1]\hfill}
+\makeatother
+
