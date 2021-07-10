@@ -9,16 +9,16 @@
 \ProvidesClass{proposalnsf}[2008/06/01 NSF proposal style v1.3 SGLS]
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions
-\LoadClass[10pt]{article} 
-%\LoadClass[11pt]{article}
+%\LoadClass[10pt]{article} 
+\LoadClass[11pt]{article}
 \RequirePackage{calc}
 %\RequirePackage{pdffig}
 %\RequirePackage{natbib}
 %\RequirePackage[american]{babel}
 %\RequirePackage{hyperref}
-\RequirePackage{mathpazo}
+%\RequirePackage{mathpazo}
 %\RequirePackage{palatino}
-%\RequirePackage{newcent}
+\RequirePackage{mathptmx}
 %\RequirePackage{times}
 
 %\usepackage[scaled]{helvet}
@@ -110,4 +110,4 @@
 %  \makeatother%
 %}
 
-\def\baselinestretch{1.05}
+%\renewcommand{\baselinestretch}{1.11}
