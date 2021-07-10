@@ -97,17 +97,17 @@
 % NSF's PDF parsers are too picky about the definition of ``no more than 6
 % lines per inch'', so we add a bit of spacing when we're right at that
 % limit for 10pt documents.
-\AtBeginDocument{%
-  \makeatletter%
-  \ifdimcomp{\dimexpr\f@size pt}{>}{10pt}{% do nothing if >10pt
-    }{% set lengths if <=10pt
-    \setlength{\baselineskip}{12.05pt}%
-    \@ifpackageloaded{biblatex}{%
-      % Not sure why biblatex doesn't want to inherit the default spacing
-      \appto{\bibsetup}{\setSpacing{1.004}}%
-     }{}%
-  }%
-  \makeatother%
-}
+%\AtBeginDocument{%
+%  \makeatletter%
+%  \ifdimcomp{\dimexpr\f@size pt}{>}{10pt}{% do nothing if >10pt
+%    }{% set lengths if <=10pt
+%    \setlength{\baselineskip}{12.05pt}%
+%    \@ifpackageloaded{biblatex}{%
+%      % Not sure why biblatex doesn't want to inherit the default spacing
+%      \appto{\bibsetup}{\setSpacing{1.004}}%
+%     }{}%
+%  }%
+%  \makeatother%
+%}
 
-
+\def\baselinestretch{1.05}
