@@ -1,17 +1,84 @@
 \section{Introduction} \label{sec:intro}
 
-TODO
+Cyber-physical systems such as avionics, nuclear power plants, automobiles, space vehicles, power generation and distribution systems, medical devices, industrial robots have been in existence for decades. 
+Such systems, which often have \textit{safety-critical} properties and \textit{real-time} (\ie stringent timing) requirements. Any problems in real-time systems (RTS) could result in significant harm to humans, the system or even the environment.  
+Systems with real-time requirements need to function correctly, but \textit{within their predefined timing constraints}, often termed as ``deadlines''.  
+For example, consider real-time applications with stringent timing constraints such as deployment of a car's airbag or an industrial robot operates on a manufacturing conveyor line. 
+A typical window for an airbag deployment (time between detection of collision and final airbag operations) is around $50$--$60$ ms~\cite{hussain2006vehicle} and the response time for robot movements (\ie placing and moving objects on the conveyor) is around $50$--$100$~ms~\cite{castelli2019development}. 
 
-\paragraph{Research Challenges.}
+\begin{wrapfigure}{r}{0.295\textwidth}
+%\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=.35]{rt_deadline.pdf}
+	\caption{Timeliness requirements of RTS.} 
+	\label{fig:rt_deadline}
+%\end{figure}
+\end{wrapfigure}
+If real-time applications failed to comply with their timing requirements (deadlines), the usefulness of results produced by the system drops sharply (see Fig.~\ref{fig:rt_deadline}). From the earlier airbag deployment and manufacturing robot example, if the application tasks fail to deploy the airbag in time or there is a delay to update the angle of rotation of the robot arm, the physical system may not work properly and hence put the safety of the human operators at risk. This is different from general-purpose systems where the usefulness drops in a more gradual manner (\eg a web service may tolerate a few millisecond delay without degrading user experience significantly). 
 
-\todo{Complete}
+\begin{wrapfigure}{r}{0.455\textwidth}
+%\begin{figure}[!ht]
+%	\centering
+	\hspace*{-1em}
+	\includegraphics[scale=.32]{rt_node_new_arial.pdf}
+	\caption{Abstraction of a real-time node with common uses cases.} 
+	\label{fig:rts_struct}
+%\end{figure}
+\end{wrapfigure}
 
-In answer to those questions, in this research, we will \ca devise \textit{novel algorithms, scheduling models, and frameworks} that are cognizant with real-time requirements \cb build \textit{design-time tools and system-level plugins} to integrate our proposed techniques into off-the-shelf systems, and \cc develop  \textit{metrics} to carefully trade-off two contending requirements: real-time vs. security. 
-\todo{Complete}
+Figure~\ref{fig:rts_struct} presents a high-level illustration of a real-time CPS. Each real-time application in the system (called ``task'') represents a time-critical function and a collection of such tasks are hosted on a hardware platform. 
+%The concept of tasks in RTS can be trivially mapped with \textit{processes} or \textit{threads} in general-purpose operating systems (OS).   
+The scheduler in real-time operating system (RTOS) uses timers and interrupt handlers to enforce timing guarantees at runtime. This ability of the scheduler
+to interrupt application processing at precise time instants
+is essential to ensure the ``correctness'' of the system. Access to shared platform resources (such as caches, buses, memory) is regulated using resource sharing protocols to ensure data consistency and bounds on waiting time so that deadlines can be met.
+The communication network in RTS is required to provide service with low
+jitters and meet end-to-end message deadline for all messages.  
+
+Although safety and fault-tolerance have long been important design
+focus in such systems, security has rarely been a consideration in the design of RTS mainly due to beliefs such as: 
+\ca RTS lack inherent value to adversaries (\textit{``why would anyone attack them?''}),
+\cb the prevalence of custom hardware/software/protocols will deter attackers (\textit{``these protocols/hardware/software are secret and so arcane that no one can decipher them''}) and also 
+\cc the lack of computing power and memory in these systems will throttle potential adversarial actions (\textit{``what can they do even if they get in?''}). While traditionally RTS adopted proprietary protocols, platforms, software and were air-gapped (\ie not connected to the outside world), with the advent of newer domains such as autonomous vehicles, drones, remote monitoring and control and Internet-of-Things (IoT)-specific applications, RTS find themselves front and center in modern society. Since many RTS now use commodity-off-the-shelf (COTS) components and are often connected to each other or even the Internet, they expose additional attack surfaces, often overturning all of the aforementioned beliefs. A number of high-profile attacks on real systems (\eg Stuxnet~\cite{stuxnet}, BlackEnergy~\cite{Ukraine16}), attack demonstrations by researchers on automobiles~\cite{ris_rts_1, checkoway2011comprehensive} and medical devices~\cite{security_medical} have shown that the threat is real and systems composed of RTS might be vulnerable to cyber attacks. 
+
+
+
+Given the time and resource constraints under which RTS operate,
+vulnerabilities in RTS differ considerably from those of traditional enterprise
+systems. Threats faced by RTS could vary in scope and effect;
+from the leakage of critical data \cite{embeddedsecurity:son2006} to hostile
+actions due to lack of authentication
+\cite{checkoway2011comprehensive, ris_rts_1, aircraft_hacking}. However, simply adding security
+mechanisms that provide confidentiality (\eg encryption), integrity protection (\eg message authentication) and availability (\eg replication) without considering the real-time and embedded nature of such systems will not be effective. In the last few years there has been a lot of focus on securing critical CPS~\cite{xie2007improving,lin2009static,mohan_s3a,securecore,securecore_memory, securecore_syscal, kim2018securing,choi2018detecting, mhasan_resecure_iot}. A major focus of such work has been on securing communication protocols and on monitoring and detection mechanisms at the network and application level. Given the increasing cyber-attack risks, however, it is essential to have a layered
+defense and integrate resilience against cyber attacks into the design of
+controllers and actuators (\ie embedded RTS). It is also critical to retrofit existing controllers and actuators with protection, detection, survival and recovery mechanisms. In addition, stringent timing constraints severely inhibit how security solutions can be added to RTS; for instance, the \textit{protection methods should not cause timing problems} in RTS. 
+
+
+\begin{mdframed}[backgroundcolor=gray!10]
+	Real-time security mechanisms have to \textit{co-exist} with the existing  tasks in the system and have to operate \textit{without} impacting the timing and safety constraints of the control logic.\\ %[0.1em]
+	\textbf{Challenge:} \em{how do we integrate security into RTS without impacting real-time guarantees?
+	}
+\end{mdframed}
+
+\paragraph{Research Questions.}
+
+%\todo{Complete}
+
+As mentioned earlier, integrating security in RTS is not straightforward since monitoring/detection mechanisms must \ca co-execute with existing real-time tasks, \cb comply with timing/safety constraints, and \cc designed/scheduled in a way that an adversary cannot easily evade them. Security integration techniques for multicore RTS even more non-trivial in particular when considering that isolation in multicore systems is a challenge in itself. Our proposal focuses on addressing the following research questions.
+\begin{itemize}[leftmargin=0.2in]
+	\item How do we \textit{integrate} and then \textit{characterize the effects of security} in RTS especially those designed using \textit{multicore} chips?
+	\item What are the \textit{trade-offs} on the security and timing requirements while guaranteeing \textit{no (or minimal) perturbations} for the real-time properties?
+	\item What are the \textit{performance criteria and metrics} that need to be considered? %while integrating security into RTS?
+\end{itemize}
+
+
+%\todo{Complete}
 
 \subsection{Proposed Research}
 
-In this project we will develop an unified framework that will \textit{integrate monitoring and detection mechanisms into \textbf{multicore} real-time systems} (Section~\ref{sec:proposed_work}). Our techniques will assist the designers of systems to better understand \ca how to \textit{integrate security} into real-time systmes and \cb what are the \textit{trade-offs} on the security front while guaranteeing minimal (or no) perturbations for the real-time properties. Our end goal, then, is to \textit{provide designers with a knob that they can use to tune to one side or the other --- real-time vs. security}. We will evaluate our proposed techniques using \ca simulations, \cb realistic workloads and embedded benchmark suites (PapaBench~\cite{nemer2006papabench}, MiBench~\cite{guthaus2001mibench},  and  MultiBench~\cite{eembc_multibench}), and \cc off-the-shelf hardware testbeds
+In this project we will develop an unified framework that will \textit{integrate monitoring and detection mechanisms into \textbf{multicore} RTS} (Section~\ref{sec:proposed_work}). Our proposed research will show that \textbf{\textit{it is possible to integrate security into RTS by a careful scheduler-level analysis of, and co-design with, system constraints, viz. software, hardware, and timing requirements}}. In answer to the above research questions, we will \textbf{\cab devise \textit{novel algorithms, scheduling models, and frameworks} that are cognizant with real-time requirements, \cbb build \textit{design-time tools and system-level plugins} to integrate our proposed techniques into off-the-shelf systems, and \ccb develop  \textit{metrics} to carefully trade-off two contending requirements: timeliness and security}. 
+Our techniques will assist the designers of systems to better understand \ca how to \textit{integrate security} into RTS and \cb what are the \textit{trade-offs} on the security front while guaranteeing minimal (or no) perturbations for the real-time properties. Our end goal, then, is to \textit{provide designers with a knob that they can use to tune to one side or the other --- real-time vs. security}. 
+
+We will evaluate our proposed techniques using \ca simulations, \cb realistic workloads and embedded benchmark suites (PapaBench~\cite{nemer2006papabench}, MiBench~\cite{guthaus2001mibench},  and  MultiBench~\cite{eembc_multibench}), and \cc off-the-shelf hardware testbeds
 (ground rover~\cite{monsterborg} and robotic arm~\cite{robot_arm_rot3u})
 [Section~\ref{sec:eval}].  Our research activities described in this proposal will be complemented with tightly integrated educational components reaching from undergraduate/graduate students, students from minority communities, and K-12 students [Section~\ref{sec:broader}]. 
 
