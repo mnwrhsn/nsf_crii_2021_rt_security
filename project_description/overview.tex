@@ -1,8 +1,30 @@
-\section{Background, Adversary Model, and Related Research} \label{sec:background}
+\section{Background and Related Research} \label{sec:background}
 
-\paragraph{Real-Time Systems.}
+\paragraph{Real-Time Systems.} RTS are defined by their strong timing requirements. Some of the common properties and assumptions related to RTS are as follows: 
+\ca implemented as a system of periodic tasks, 
+\cb worst-case bounds are known for most loops as well as the critical pieces of code, 
+%\ciii no dynamically loaded or self-modifying code, 
+%\civ recursion is either not used or statically bounded, and
+\cc scheduled by priority-driven schemes, and
+\cd limited resources (\eg processor, memory, energy). %and
+%\cvi stringent timing and safety requirements. 
+%The concept of tasks in RTS can be trivially mapped with \textit{processes} or \textit{threads} in general-purpose operating systems (OS).   
+%The \textit{scheduler} uses timers and interrupt handlers to enforce timing guarantees
+at runtime. 
+%This ability of the scheduler to interrupt application processing at precise time instants is essential to ensure the ``correctness'' of the system. 
+Each real-time task $\tau_i$  is characterized by $(T_i, C_i, D_i)$ in which $T_i$ is the period (inter-arrival time), $C_i$ is the constant upper bound on the execution time, 
+%called worst case execution time (WCET), 
+and $D_i$ is the timing constraint (deadline). 
+%Tasks in real-time systems are generally characterized by their periods (inter-arrival times), constant, upper bounded execution times,
+%%, called worst case execution time (WCET) 
+%and temporal constraints (deadlines).
+In multicore systems, task scheduling can be viewed as solving an allocation problem 
+%(\ie on which processor a task should execute) 
+depending on design criteria such as~\cite{mutiprocessor_survey}: \ca \textit{no migration} (tasks are allocated to a fixed core), \cb \textit{task-level migration} (the jobs of a task may execute on different cores), and \cc \textit{job-level migration} (the jobs of a task migrate to and execute on different core although parallel execution of a job is not permitted). Schedulability tests\cite{res_time_1, res_time_rts,  bini2004schedulability,mutiprocessor_survey} are used to determine
+if all tasks in the system meet their respective deadlines. If this is the
+case, then the task set is deemed to be \textit{``schedulable''} and the system, \textit{safe}.
 
-\paragraph{System and Adversary Model.}
+
 
 %\subsection{State-of-the-art}
 
@@ -19,12 +41,16 @@ protect against security vulnerabilities. However, those frameworks require cust
 
 The focus of this proposed research is on integrating or retrofitting security mechanisms into RTS.  When integrating any security mechanisms into RTS, the designers need to ensure that they do not perturb or impact the real-time functions in any significant way while at the same time provide the necessary level of security. This is especially acute in the case of \textit{legacy systems} (\ie existing RTS where modification or perturbation of task parameters such as run-times, periods, and task execution orders is not always feasible.) Any security mechanisms that are introduced not only have to co-exist with existing real-time tasks without violating their real-time and safety constraints but also the {\em parameters of such legacy tasks cannot be adjusted to accommodate the security tasks.}  Not only must the security mechanisms work effectively but they must also not interfere with the deadlines of real-time tasks. For instance, any monitoring and detection mechanism has to be designed so that an adversary cannot easily evade it. This may require that the monitoring and detection tasks be run \textit{frequently}. However, the stringent timing constraints in hard RTS introduce additional complexities for the implementation of such cyber-security mechanisms. For instance, the strict deadlines for the completion of periodic real-time tasks may not allow for frequent execution of security mechanisms. Further, unlike in conventional computing systems, it may not be possible to execute the security mechanisms for arbitrary lengths of time. The challenge is then, how do we develop solutions that address the apparent tension between \textit{security requirements} (\ie having enough cycles for effective monitoring detection) and the \textit{timing and safety requirements} (\ie not interfere with deadlines)?
 
-Hence, we propose to improve the security posture of RTS through integration of \textit{\textbf{``security tasks''}} (\ie tasks that are specific for intrusion monitoring and detection tasks purposes) while ensuring that the existing real-time tasks are \textit{not affected} by such integration. Security tasks could include protection, detection or response mechanisms, depending on the system requirements --- for instance, a sensor correlation task (to detect sensor manipulation) or an anomaly detection task (that checks possible intrusions)~\cite{caml_song2016}. Table~\ref{table:rtos} presents some examples of security tasks that can be integrated into legacy systems (\textbf{Note:} this is by no stretch meant to be an exhaustive list).  
+
+\input{project_description/se_task_table}
+
+Hence, we propose to improve the security posture of RTS through integration of \textit{\textbf{``security tasks''}} (\ie tasks that are specific for intrusion monitoring and detection tasks purposes) while ensuring that the existing real-time tasks are \textit{not affected} by such integration. Security tasks could include protection, detection or response mechanisms, depending on the system requirements --- for instance, a sensor correlation task (to detect sensor manipulation) or an anomaly detection task (that checks possible intrusions)~\cite{caml_song2016}. Table~\ref{table:rtos} presents some examples of security tasks that can be integrated into legacy systems. \textbf{Note:} Table~\ref{table:rtos} is by no stretch meant to be an exhaustive list. Our proposed work will \textit{not} design towards any specific security mechanisms --- our focus here is to \textit{integrate any designer-provided security monitoring tasks} and \textit{schedule} them with respect to real-time constraints into a multicore RTS.
+
 
 \paragraph{Considerations  for Integrating Security  Mechanisms.} To begin with, we propose the following two performance criteria:
 
 \begin{enumerate}[leftmargin=0.2in]
-	\item \textit{Monitoring Frequency:} In order to provide the best protection, the security tasks need to be executed quite often. On the one hand, if the interval between consecutive monitoring events is too large, the adversary may harm the system (and remain undetected) between two invocations of the security task. On the other hand, if the security tasks are executed very frequently then it may impact the schedulability of the real-time tasks. Herein lies an important trade-off between monitoring frequency and schedulability. 
+	\item \textit{Monitoring Frequency:} In order to provide the best protection, the security tasks need to be executed quite often. On the one hand, if the interval between consecutive monitoring events is too large, the adversary may harm the system (and remain undetected) between two invocations of the security task. On the other hand, if the security tasks are executed very frequently then it may impact the schedulability of the real-time tasks. Herein lies an important \textit{trade-off} between \textit{monitoring frequency} and \textit{schedulability}. 
 	
 	\item \textit{Responsiveness:} In some circumstances, a security task may need to execute with less interference from higher-priority tasks. For instance, consider the scenario where a security breach is suspected. In such an event the security task may be required to \textit{perform more fine-grained checking instead of waiting for its next periodic slot}. This may result in delayed execution of low-priority, non-critical, real-time tasks.
 	However, the scheduling policy needs to ensure that the system remains secure without violating real-time constraints for critical, high-priority, real-time tasks. 
@@ -36,6 +62,16 @@ Hence, we propose to improve the security posture of RTS through integration of 
 Unlike single core systems, integrating security into multicore platforms is more challenging since the designers now have multiple choices for where to allocate the security tasks. For instance, should the engineers: 
 \ci \textit{dedicate a core} to all the security tasks; or 
 \cii \textit{spread the security tasks to all cores} (in conjunction with the real-time tasks) and if so, how to determine the \textit{task-to-core assignment}? or \ciii \textit{execute them continuously} across any available core? In addition, how the designers can \textit{determine the monitoring frequency of security tasks}? How do we develop a \textit{reactive framework that dynamically adjust security tasks into available cores for better responsiveness upon suspicion of a security breach?} These are themselves critical research challenges that need to be investigated.
+
+\paragraph{Adversary Model.}
+
+We assume that an adversary may destabilize the system by leveraging (known) vulnerabilities. 
+%For example, an attacker could compromise the file system (resulting in corrupted information/system log), change the of control/actuation commands or infer side-channel information (\eg user tasks, cache, thermal profiles) to launch further attacks (\eg denial of service). 
+%While there exists mechanisms (such as Simplex~\cite{sha2001using,l1_simplex}) that guarantee (hardware/software) fault tolerance, I consider the cases where an attacker intentionally induces faults (\ie adversarial artifacts) that may jeopardize the safety of the system (\eg results in miss deadlines). 
+Our focus is on threats that can be dealt with by \textit{integrating additional security tasks} into the host (see Table~\ref{table:rtos} for related examples). The addition of such tasks may necessitate changing the schedule or increasing the execution time of real-time tasks as was the case in earlier work~\cite{sibin_RT_security_journal,sg1, sg1, lin2009static,xie2007improving, zhang2013design, jiang2013optimization}.  In this research we consider situations where additional security tasks  are only allowed to have no (or minimal) impact on the schedule of existing real-time tasks and are not allowed to modify real-time parameters. We note that the design of integration techniques and the design of the specific security tasks are orthogonal problems; and our proposed techniques are agnostic to the specific monitoring mechanism. 
+
+%Since we aim to maximize the frequency of execution of security tasks, mechanisms whose performance improves with frequency of execution (\eg intrusion monitoring and detection tasks or logging/tracing mechanisms) benefit from my model.
+
 
 
 %For instance,is it better to \textit{dedicate a core} to all the security tasks or is it better to \textit{spread them out} (in conjunction with the real-time tasks) and if so, to \textit{which cores}? It is not trivial to determine the execution frequency and core assignment of security mechanisms (\ie \textit{what} security tasks will execute on \textit{which core} and with \textit{what frequency}). This in itself a research challenge that needs to be investigated.

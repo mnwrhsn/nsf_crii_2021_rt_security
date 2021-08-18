@@ -1,0 +1,25 @@
+
+\begin{wraptable}{r}{0.505\textwidth}
+%\begin{table*}% [h]
+%\renewcommand{\arraystretch}{1.3}
+%\vspace{-\baselineskip}
+
+\caption{Example of Security Tasks}
+\label{table:rtos}
+%\centering
+\scriptsize
+\begin{tabular}{P{3.1cm}||P{4.19cm}}
+    \hline %\\
+    \bfseries Security Task & \bfseries Approach/Tools\\
+    \hline\hline
+    File-system checking & Tripwire~\cite{tripwire}, AIDE~\cite{aide} \\
+    Network packet monitoring & Bro~\cite{bro}, Snort~\cite{snort} \\
+    Hardware event monitoring & perf~\cite{linux_perf}, OProfile~\cite{oprofile}\\ 
+    Application specific checks & Behavior-based detection~\cite{anomaly_detection_survey, securecore,securecore_memory,securecore_syscal} \\
+    \hline
+    \end{tabular}
+%\end{table*}
+%\vspace*{0.1\baselineskip}
+\vspace{-2mm}
+\end{wraptable} 
+
