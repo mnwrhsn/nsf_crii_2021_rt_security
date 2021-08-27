@@ -30,6 +30,10 @@ Our preliminary work is designed for fixed-priority schedulers since they are co
 \subsection{Bringing it Together: Secure Hardware-Software Integration}
 
 
+All of the algorithms and mechanisms discussed thus far must be implemented as software components that run on the multicore platform. If the security tasks are infiltrated or they cannot be scheduled, no matter how effective the original algorithms, we cannot guarantee the security of the system. One challenge is: \textit{what are the minimum components that must be provided with the isolation mechanisms?} Even if the various components are carrying out their expected functionality, the security of the systems might be jeopardized if the underlying execution platforms (hardware and operating systems) are unable to protect security tasks from malicious actions. Hence, security tasks require \textit{isolation guarantees} --- to prevent tampering, and there is a need for trusted execution environments (TEEs)~\cite{?} to ensure the integrity and trustworthiness of the overall system. In particular, we proposed to use off-the-shelf trusted modules (e.g., ARM TrustZone~\cite{trustzone_survey,trustzone_survey_2}) to ensure tamper-proof execution of security tasks. Since vanilla TrustZone is not designed for real-time applications, we need algorithms and techniques to ensure that security tasks comply with real-time requirements when they execute within TEEs.
+
+In the past we successfully used off-the-shelf trusted modules (e.g., ARM TrustZone [32]) in multiple cyber-physical use-cases~\cite{} --- we will leverage this expertise in the proposed research.
+
 
 \vspace*{1.0em}
 \begin{mdframed}[backgroundcolor=gray!10]
