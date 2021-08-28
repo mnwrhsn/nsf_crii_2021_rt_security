@@ -76,11 +76,44 @@ Our focus is on threats that can be dealt with by \textit{integrating additional
 
 %For instance,is it better to \textit{dedicate a core} to all the security tasks or is it better to \textit{spread them out} (in conjunction with the real-time tasks) and if so, to \textit{which cores}? It is not trivial to determine the execution frequency and core assignment of security mechanisms (\ie \textit{what} security tasks will execute on \textit{which core} and with \textit{what frequency}). This in itself a research challenge that needs to be investigated.
 
-\paragraph{Preliminary Work: Contego~\cite{mhasan_rtss16, mhasan_ecrts17} and Hydra~\cite{mhasan_date18, mhasan_date20}.}
+%\paragraph{Preliminary Work: Contego~\cite{mhasan_rtss16, mhasan_ecrts17} and Hydra~\cite{mhasan_date18, mhasan_date20}.}
+
+\paragraph{Preliminary Work.}
 
 The PI's dissertation work~\cite{mhasan_rtss16, mhasan_ecrts17, mhasan_date18, mhasan_date20} provides the foundation of this research. 
+%In early work~\cite{mhasan_rtss16}
+%we proposed a framework for single core systems that allows the execution of
+%security tasks \textit{``opportunistically'' in conjunction with real-time
+%	tasks, while keeping the best possible periods for the security tasks that
+%	ensure all the tasks in the system remain schedulable}. In particular, we propose to execute security tasks \textit{opportunistically}, that is, with the lowest priority so that real-time tasks are not affected. We measured the security of the system by means of the \textit{achievable
+%	periodic monitoring}. Let $T_i$ be the period of the security task $\tau_i \in
+%\Gamma_S$ that needs to be determined. Since our goal was to minimize the
+%perturbation between the achievable period $T_i$ and the desired period
+%$T_i^{des}$, we define the following metric: 
+%%\begin{equation}\label{eq:metric}
+%$\eta_i = \frac{T_i^{des}}{T_i}$
+%%\end{equation}
+%that denotes the \textit{tightness} of the frequency of periodic monitoring for
+%the security task $\tau_i$. Thus $\eta =  \sum_{\tau_i \in \Gamma_S}
+%\omega_i \eta_i$ denotes the \textit{cumulative tightness} of the achievable
+%periodic monitoring where $\omega_i $ are given weights. Our proposed  metric provides one way to trade-off security with
+%schedulability --- if the interval between consecutive monitoring
+%events is too large, an adversary may remain undetected and harm the system
+%between two invocations of the security task; but, a very
+%frequent execution of security tasks may impact the schedulability of the
+%real-time tasks. Hence, $\eta$ allows us to execute security
+%routines with a frequency closer to the desired one while respecting the
+%temporal constraints of the other real-time tasks.
+In early work~\cite{mhasan_rtss16} we introduce a technique that allows the execution of security tasks \textit{``opportunistically'' with lowest-priority} in conjunction with real-time
+tasks (so that they do not interfere the execution order of real-time tasks), while keeping the best possible periods for the security tasks. However, if the security tasks always execute with lowest priority, they suffer more interference (i.e., preemption from high-priority real-time tasks) and the longer detection time (due to poor response time) will make the security mechanisms less effective. In order to provide better responsiveness and increase the effectiveness of monitoring and detection mechanisms, we then propose a \textit{dual-mode framework}~\cite{mhasan_ecrts17}
+%For the most part, CONTEGO executes in a PASSIVE mode (i.e., with opportunistic execution of intrusion detection tasks). However, CONTEGO will switch to an ACTIVE mode of operation to perform additional checks as needed (e.g., fine-grained analysis, used as an example in Section 4.7.2). This ACTIVE mode potentially executes with higher priority, while ensuring the timing guarantees of real-time tasks.
+ %I then propose a dual-mode model (named CONTEGO) 
+ that allows the security tasks to execute in two different modes: \ca by default security tasks execute opportunistically when the system is deemed to be uncompromised (PASSIVE mode); \cb if an anomaly is suspected, the security tasks may switch to higher priority (while ensuring the timing guarantees of real-time tasks) to perform additional checks as needed (ACTIVE mode); \cc the system reverts to PASSIVE mode if: \ci no anomalous activity is found or \cii the root cause of the problem is detected and malicious entities are removed. We also devise a \textit{metric} (called \textit{``tightness of monitoring''}) that allows us to execute security tasks with a frequency closer to what the designers' expect and provides us one way to trade-off security with schedulability. 
+ 
+ %We evaluate our ideas technique using time-to-detect an intrusion as a performance criteria with a view to observing how well the security tasks can perform desired monitoring and detection after period selection.
 
 
+ 
 
 %Unlike single core systems, integrating security into multicore platforms is more challenging since the designers now have multiple choices for where to allocate the security tasks. For instance, should the engineers: 
 %%\ci \textit{dedicate a core} to all the security tasks; or 
@@ -88,13 +121,10 @@ The PI's dissertation work~\cite{mhasan_rtss16, mhasan_ecrts17, mhasan_date18, m
 %Chapter~\ref{ch:hydra-c} addresses aforementioned issues. 
 
 
-In particular, I first develop
-a low-complexity iterative solution (called \coolnameplus) that
-jointly finds the security tasks’ periods and core assignments. The \coolnameplus mechanism assumes that the security tasks are \textit{statically assigned} across all available cores. 
+The above pieces work is designed for single core platforms. In the followup work~\cite{mhasan_date18} we first develop
+a low-complexity iterative solution that
+jointly finds the security tasks’ periods and core assignments where the security tasks are \textit{statically assigned} across all available cores. 
 %I compare \coolnameplus with another scheme that allocates a dedicated core for security tasks while the real-time tasks are assigned to the remaining cores. I find out on average, \coolnameplus can provide 27.23\% faster intrusion detection rate (on a quad core system) when compared to the other scheme. 
 %In Chapter~\ref{ch:hydra-c} 
-I then extend \coolnameplus with an alternate design mechanism, \pnamemcex, that \textit{can raise the ``responsiveness'' of monitoring tasks by increasing their frequency of execution}. The key intuition is that if the security tasks are able to execute with as few interruptions as possible (\eg by moving immediately to an empty core when they are interrupted), then there is much higher chance of successful detection and correspondingly, a much lower chance of successful adversarial action. 
-%I therefore present a design-time framework (named \pnamemcex) that 
-%\pnamemcex enables \textit{continuous execution} of security tasks (\ie execute as frequently as possible) across cores, without impacting timing requirements of existing real-time tasks. 
-\pnamemcex provides better monitoring when compared to \coolnameplus but comes with a cost (in terms of context switch overhead).
+We then introduce with an alternate design mechanism~\cite{ mhasan_date20} that \textit{can raise the ``responsiveness'' of monitoring tasks by increasing their frequency of execution}. The key intuition is that if the security tasks are able to execute with as few interruptions as possible (\eg by moving immediately to an empty core when they are interrupted), then there is much higher chance of successful detection and correspondingly, a much lower chance of successful adversarial action. The latter scheme provides better monitoring but comes with a cost (in terms of context switch overhead).
 
