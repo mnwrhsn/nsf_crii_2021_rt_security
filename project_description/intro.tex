@@ -15,7 +15,7 @@ A typical window for an airbag deployment (time between detection of collision a
 	\label{fig:rt_deadline}
 %\end{figure}
 \end{wrapfigure}
-If real-time applications failed to comply with their timing requirements (deadlines), the usefulness of results produced by the system drops sharply (see Fig.~\ref{fig:rt_deadline}). From the earlier airbag deployment and manufacturing robot example, if the application tasks fail to deploy the airbag in time or there is a delay to update the angle of rotation of the robot arm, the physical system may not work properly and hence put the safety of the human operators at risk. This is different from general-purpose systems where the usefulness drops in a more gradual manner (\eg a web service may tolerate a few millisecond delay without degrading user experience significantly). 
+If real-time applications failed to comply with their timing requirements (deadlines), the usefulness of results produced by the system drops sharply (see Figure~\ref{fig:rt_deadline}). From the earlier airbag deployment and manufacturing robot example, if the application tasks fail to deploy the airbag in time or there is a delay to update the angle of rotation of the robot arm, the physical system may not work properly and hence put the safety of the human operators at risk. This is different from general-purpose systems where the usefulness drops in a more gradual manner (\eg a web service may tolerate a few millisecond delay without degrading user experience significantly). 
 
 \begin{wrapfigure}{r}{0.455\textwidth}
 %\begin{figure}[!ht]
@@ -33,7 +33,17 @@ The scheduler in real-time operating system (RTOS) uses timers and interrupt han
 to interrupt application processing at precise time instants
 is essential to ensure the ``correctness'' of the system. Access to shared platform resources (such as caches, buses, memory) is regulated using resource sharing protocols to ensure data consistency and bounds on waiting time so that deadlines can be met.
 The communication network in RTS is required to provide service with low
-jitters and meet end-to-end message deadline for all messages.  
+jitters and meet end-to-end message deadline for all messages. Some of the common properties and assumptions related to RTS are as follows: 
+\ca implemented as a system of periodic tasks, 
+\cb worst-case bounds are known for most loops as well as the critical pieces of code, 
+%\ciii no dynamically loaded or self-modifying code, 
+%\civ recursion is either not used or statically bounded, and
+\cc scheduled by priority-driven schemes, and
+\cd limited resources (\eg processor, memory, energy). \textit{Schedulability tests}~\cite{res_time_1, res_time_rts,  bini2004schedulability,mutiprocessor_survey} are used to determine
+if all tasks in the system meet their respective deadlines. If this is the
+case, then the task set is deemed to be \textit{``schedulable''} and the system, \textit{safe}.
+
+ 
 
 Although safety and fault-tolerance have long been important design
 focus in such systems, security has rarely been a consideration in the design of RTS mainly due to beliefs such as: 
@@ -49,13 +59,13 @@ systems. Threats faced by RTS could vary in scope and effect;
 from the leakage of critical data \cite{embeddedsecurity:son2006} to hostile
 actions due to lack of authentication
 \cite{checkoway2011comprehensive, ris_rts_1, aircraft_hacking}. However, simply adding security
-mechanisms that provide confidentiality (\eg encryption), integrity protection (\eg message authentication) and availability (\eg replication) without considering the real-time and embedded nature of such systems will not be effective. 
+mechanisms that provide confidentiality (\eg encryption), integrity protection (\eg message authentication), and availability (\eg replication) without considering the real-time and embedded nature of such systems will not be effective. 
 %In the last few years there has been a lot of focus on securing critical RTS~\cite{xie2007improving,lin2009static,mohan_s3a,securecore,securecore_memory, securecore_syscal, kim2018securing,choi2018detecting, mhasan_resecure_iot}. A major focus of such work has been on securing communication protocols and on monitoring and detection mechanisms at the network and application level. 
 Given the increasing cyber-attack risks, however, it is essential to have a layered
 defense and integrate resilience against cyber attacks into the design of 
 %controllers and actuators (\ie embedded RTS). 
 embedded RTS.
-It is also critical to retrofit existing controllers and actuators with protection, detection, survival and recovery mechanisms. In addition, stringent timing constraints severely inhibit how security solutions can be added to RTS; for instance, the \textit{protection methods should not cause timing problems} in RTS. 
+It is also critical to retrofit existing controllers and actuators with protection, detection, survival and recovery mechanisms. In addition, stringent timing constraints severely inhibit how security solutions can be added to RTS; for instance, the \textit{protection methods should not cause timing problems}.% in RTS. 
 
 
 
@@ -85,12 +95,18 @@ Hence, our proposal focuses on addressing the following research questions.
 
 \subsection{Proposed Research}
 
-In this project we will develop an unified framework that will \textit{integrate monitoring and detection mechanisms into \textbf{multicore} RTS} (Section~\ref{sec:proposed_work}). Our proposed research will show that \textbf{\textit{it is possible to integrate security into RTS by a careful scheduler-level analysis of, and co-design with, system constraints, viz. software, hardware, and timing requirements}}. In answer to the above research questions, we will \textbf{\cab devise \textit{novel algorithms, scheduling models, and frameworks} that are cognizant with real-time requirements, \cbb build \textit{design-time tools and system-level plugins} to integrate our proposed techniques into off-the-shelf systems, and \ccb develop  \textit{metrics} to carefully trade-off two contending requirements: timeliness and security}. 
+In this project we will develop an unified framework that will \textit{integrate monitoring and detection mechanisms into \textbf{multicore} RTS} (Section~\ref{sec:proposed_work}). 
+Our proposed research will show that \textbf{\textit{it is possible to integrate security into RTS by a careful scheduler-level analysis of, and co-design with, system constraints, viz. software, hardware, and timing requirements}}. In answer to the above research questions, we will \textbf{\cab devise \textit{novel algorithms, scheduling models, and frameworks} to integrate security that are cognizant with real-time requirements, \cbb build \textit{design-time tools and system-level plugins} to incorporate our proposed techniques into off-the-shelf systems, and \ccb develop  \textit{metrics} to carefully trade-off two contending requirements: timeliness and security}. 
 Our techniques will assist the designers of systems to better understand \ca how to \textit{integrate security} into RTS and \cb what are the \textit{trade-offs} on the security front while guaranteeing minimal (or no) perturbations for the real-time properties. Our end goal, then, is to \textit{provide designers with a knob that they can use to tune to one side or the other --- real-time vs. security}. 
 
-We will evaluate our proposed techniques using \ca simulations, \cb realistic workloads and embedded benchmark suites (PapaBench~\cite{nemer2006papabench}, MiBench~\cite{guthaus2001mibench},  and  MultiBench~\cite{eembc_multibench}), and \cc off-the-shelf hardware testbeds
-(ground rover~\cite{monsterborg} and robotic arm~\cite{robot_arm_rot3u})
-[Section~\ref{sec:eval}].  Our research activities described in this proposal will be complemented with tightly integrated educational components reaching from undergraduate/graduate students, students from minority communities, and K-12 students [Section~\ref{sec:broader}]. 
+We will evaluate our proposed techniques using \ca simulations, \cb realistic workloads and embedded benchmark suites, 
+%(PapaBench~\cite{nemer2006papabench}, MiBench~\cite{guthaus2001mibench},  and  MultiBench~\cite{eembc_multibench})
+and \cc off-the-shelf hardware testbeds (Section~\ref{sec:eval}).  
+%(ground rover~\cite{monsterborg} and robotic arm~\cite{robot_arm_rot3u})
+%[Section~\ref{sec:eval}].  
+Our research activities 
+%described in this proposal 
+will be complemented with tightly integrated educational components reaching from undergraduate/graduate students, students from minority communities, and K-12 students (Section~\ref{sec:broader}). 
 %\paragraph{Research Questions.}
 The main outcomes of our research will be to:
 
@@ -107,7 +123,7 @@ The main outcomes of our research will be to:
 
 \paragraph{Intellectual Merit.} Our proposed research will develop a foundational body of work to improve the security of real-time systems. It will tackle a fundamentally complex problem: \textit{how to \ul{integrate monitoring and detection techniques} in RTS while still meeting the stringent timing constraints imposed upon such systems?} By systematically integrating security monitoring tasks, the proposed work should \textit{increase the difficulty for adversaries}. Finally, the proposed work also addresses another critical need: \textit{how do we \ul{measure/quantify} the effects of security and \ul{analyze trade-offs} between security and real-time guarantees?}
 
-\paragraph{Plans for Assessing Success.}
+%\paragraph{Plans for Assessing Success.}
 
 \input{project_description/expertise}
 

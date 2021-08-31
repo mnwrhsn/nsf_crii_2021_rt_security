@@ -1,5 +1,3 @@
-
-
 % Header should be exactly this. 
 %\section{Broader Impacts of the Proposed Work} \label{sec:broader}
 
@@ -7,11 +5,7 @@
 
 
 
-
-%\todo{fix.}
-
-
-\paragraph{Societal Impact.} The proposed research and educational plans have the potential for broad impact. A large number of critical systems of modern society have real-time requirements (\eg avionics, automobiles, power grids, manufacturing plants, medical devices, industrial control systems, unmanned vehicles). They are also increasingly becoming targets for cyber attacks~\cite{stuxnet,Ukraine16,drone_threat2,dronhack,aircraft_hacking,checkoway2011comprehensive,koscher2010experimental,ddos_iot_camera,security_medical}. Any successful, profound attacks on these systems can have catastrophic results, leading to loss of injury to humans, negative impacts on the system and even the environment. Hence, techniques developed as part of this project will make such systems \textit{more secure} and applicable to a \textit{broad range of domains}. Our proposed research can lead to substantial improvements in consumer cyber-physical products and also improve systems that have \textit{national security considerations}. All data, insights, results, implemented frameworks, and course modules will be made available to the \textit{research community via a dedicated project website} along with appropriate documentation. Our public releases will facilitate the rapid dissemination and adoption of our ideas in the scientific community. 
+\paragraph{Societal Impact.} The proposed research and educational plans have the potential for broad impact. A large number of critical systems of modern society have real-time requirements (\eg avionics, automobiles, power grids, manufacturing plants, medical devices, industrial control systems, unmanned vehicles). They are also increasingly becoming targets for cyber attacks~\cite{stuxnet,Ukraine16,drone_threat2,dronhack,aircraft_hacking,checkoway2011comprehensive,koscher2010experimental,ddos_iot_camera,security_medical}. Any successful, profound attacks on these systems can have catastrophic results, leading to loss of injury to humans, negative impacts on the system and even the environment. Hence, techniques developed as part of this project will make such systems \textit{more secure} and applicable to a \textit{broad range of domains}. Our proposed research can lead to substantial improvements in consumer products and also improve systems that have \textit{national security considerations}. All data, insights, results, implemented frameworks, and course modules will be made available to the \textit{research community via a dedicated project website} along with appropriate documentation. Our public releases will facilitate the rapid dissemination and adoption of our ideas in the scientific community. 
 %The proposed educational and outreach activities (described next) are expected to encourage underrepresented students to pursue careers in STEM.
 In addition to technical contributions, our proposed educational and outreach activities (presented next) will have a broad and positive societal impact by \ca training a qualified workforce and \cb encouraging underrepresented students to pursue careers in computing.
 
@@ -22,11 +16,18 @@ The PI anticipates that the results obtained from this project will provide a fo
 %Other students who are not directly involved in the project will also benefit through research seminars and scientific publications. 
 
 
- \textit{\textbf{$\diamond$~Development of a New Course:}} 
- 
- 
- \textit{\textbf{$\diamond$~Enhancement of Existing Courses:}} 
- 
+\textit{\textbf{$\diamond$~Development of a New Course:}} As an effort to expose students to diverse computing domains, the PI will develop a \textit{new senior undergraduate/graduate-level course} on ``Real-Time Embedded Systems''. The course will cover the basics of real-time scheduling and related security/safety principles as well as include hands-on lab exercises using popular RTOS (LITMUS\textsuperscript{RT}~\cite{litmus_rt} and FreeRTOS~\cite{freertos}). The PI plans to design the course by Year 1 and teach Year 2 (Fall semester). 
+
+\textit{\textbf{$\diamond$~Enhancement of Existing Courses:}} Introduction to Cybersecurity (CS 656) is one of the foundational courses in our undergraduate program and forms a prerequisite for many advanced graduate courses. 
+%The PI believes that the security course should cover broader topics. 
+%As a part of this project, the PI intends to update the security course with broader topics and further enrich students' knowledge in various domains.
+%Our current Operating Systems course does not include any hands-on system exercises. The PI will update the course curriculum with real-time operating system design principles and include additional laboratory exercises (\eg process scheduling, memory management, and I/O handling) with Unix-based systems.
+The PI will extend the existing CS 656 syllabus and include \textit{four lectures} on various attacks and related defense techniques on real-time and cyber-physical systems. Further, 
+the PI will design a new \textit{``red-team/blue-team'' lab exercise} where red-team will develop techniques to break a real system (LITMUS\textsuperscript{RT} scheduler) and the blue-team will prevent this using the ideas being developed in this research. The PI intends to offer the revised CS 656 course from Year 2 (Spring semester). During the Spring 2021 semester, the PI introduced a graduate-level course on real-time security
+%\footnote{Very few courses exist in the area of security for real-time systems.} 
+(CS 898CC)~\cite{wsu_cs898cc} that focused on recent research. As students from multiple areas were enrolled, the course was successful, and the class had very insightful discussions that generated multiple research ideas. The PI will offer the CS 898CC course again in Year 1 and Year 2 (Fall semesters), with additional topics on security integration techniques proposed in this project. 
+
+
 
 \paragraph{Undergraduate Research Involvement.}
 %The PI realizes that research opportunities for undergraduate students \ca motivate them pursuing a STEM career and \cb enhance their critical skills %for an engineering career, 
@@ -34,7 +35,7 @@ The PI anticipates that the results obtained from this project will provide a fo
 %The budget of our proposal includes summer research support for \textit{\ul{two undergraduate}} students. 
 This project will provide unique research opportunities for our undergraduate students.
 %\textit{\ul{two undergraduate}} students. 
-The PI will closely supervise the students --- they will engage in semester-long research activities and assist the PhD student to \ca build the hardware prototypes, \cb deploy and test controller programs, \cc integrate randomization protocols into testbeds  and take measurements (\eg memory/context switch overheads) to evaluate the efficacy of proposed schemes, and \cd prepare open-source releases  and documentation. The PI will actively involve undergraduate students in the scientific writing process and 
+The PI will closely supervise the students --- they will engage in semester-long research activities and assist the PhD student to \ca build the hardware prototypes, \cb deploy and test controller programs, and \cc prepare open-source releases  and documentation. The PI will actively involve undergraduate students in the scientific writing process and 
 %co-authored with PI and graduate students in our publications. 
 include them as authors in the publications.
 They will also participate in Wichita State's undergraduate research competition, URCAF~\cite{wsu_urcaf}, and present their work to the broader community.
@@ -45,7 +46,7 @@ The PI is attentive to diversity and inclusion in his research and educational a
 %The PI strongly believes in maintaining a diverse research group and will make additional efforts to promote diversity.  
 %While the PI make contributions towards educating all students, he will make additional efforts to promote diversity. 
 The PI currently advises \textit{\ul{two female} students} (one PhD and one undergraduate).
-The proposal includes \textit{funding support for \ul{one female PhD student}} (Neha Chauhan) who has \textit{already started working on the project}. 
+The proposal includes \textit{funding support for \ul{one female PhD student}} who has \textit{already started working on the project}. 
 %One \textit{female PhD} (Neha Chauhan) is \textit{already working on the project}, and the budget of the proposal included two year funding support for her. 
 %PI Hasan recruited another female PhD student 
 %(Sara Yavari) 
@@ -56,11 +57,13 @@ The proposal includes \textit{funding support for \ul{one female PhD student}} (
 The PI will make additional efforts to promote diversity and  ensure that \textit{\ul{at least one position} will be reserved \ul{all times} in his research lab for underserved populations, including students with disabilities}. 
 
 
-\textit{\textbf{$\diamond$~Broadening Participation in Wichita\footnote{Supporting letters from \textit{Ana Lazar\'in} (Director, Broadening Participation and Recruitment, College of Engineering), \textit{Vinod Namboodiri} (Wichita State REU program lead), and \textit{Joe Jabara} (Director, Hub for Cybersecurity Education and Awareness) are attached.}:}}  
+\textit{\textbf{$\diamond$~Broadening Participation in Wichita\footnote{Supporting letters from \textit{Ana Lazar\'in} (Director, Broadening Participation and Recruitment, College of Engineering) and \textit{Joe Jabara} (Director, Hub for Cybersecurity Education and Awareness) are attached.}:}}  
 %\textit{\textbf{$\diamond$~Broadening Participation in Wichita\footnote{Supporting letters are attached.}:}}  
-The PI is working closely with Wichita State's Shocker Engineering Academy~\cite{wsu_sea} to increase the representation of minority communities in engineering. The program is supported by an NSF initiative called KS-LSAMP (Kansas Louis Stokes Alliances for Minority Participation). As a part of this program, the PI is currently mentoring \textit{\ul{two undergraduate students}} from underrepresented communities (including \textit{\ul{one black female}} student). The PI will continue this effort and offer projects especially targetted for \textit{freshman/sophomore undergraduate students} on topics related to security and resiliency of real-time systems.
+The PI is working closely with Wichita State's Shocker Engineering Academy~\cite{wsu_sea} to increase the representation of minority communities in engineering. The program is supported by an NSF initiative called KS-LSAMP (Kansas Louis Stokes Alliances for Minority Participation)~\cite{wsu_kslsamp}. As a part of this program, the PI is currently mentoring \textit{\ul{two undergraduate students}} from underrepresented communities (including \textit{\ul{one black female}} student). The PI will continue this effort and offer projects especially targeted for \textit{freshman/sophomore undergraduate students} on topics related to security and resiliency of real-time and cyber-physical systems.
 %The PI will also offer projects for Research Experiences for Undergraduates (REU) program~\cite{wsu_netcps_reu} and provide research opportunities especially for \textit{freshman/sophomore undergraduate students} on topics related to security and resiliency of real-time systems. 
-The PI is also actively involved in Wichita State Hub for Cybersecurity Education and Awareness (HCEA)~\cite{wsu_hcea}. As a part of this initiative, PI will organize \textit{CTF (capture the flag) competitions and security boot camps for middle and high school students} (Year 1 and Year 2, Summer semesters). The PI will also \textit{engage in a campaign} in Year 2 to attract under-represented groups using presentations by students from these communities. The proposed initiatives will develop research mindset for K-12 and undergraduate students from the very early stages of their academic careers. 
+The PI is also actively involved in Wichita State Hub for Cybersecurity Education and Awareness (HCEA)~\cite{wsu_hcea}. As a part of this initiative, PI will organize \textit{CTF (capture the flag) competitions and security boot camps for middle and high school students} (Year 1 and Year 2, Summer semesters). 
+%The PI will also \textit{engage in a campaign} in Year 2 to attract under-represented groups using presentations by students from these communities. 
+The proposed initiatives will develop research mindset for K-12 and undergraduate students from the very early stages of their academic careers. 
 
 
  \textit{\textbf{$\diamond$~Other Outreach Activities:}} 
