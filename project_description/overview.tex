@@ -54,6 +54,12 @@ Hence, we propose to improve the security posture of RTS through integration of 
 %Table~\ref{table:rtos} is by no stretch meant to be an exhaustive list. 
 Our proposed work will \textit{not} design towards any specific security mechanisms --- our focus here is to \textit{integrate any designer-provided security monitoring tasks} and \textit{schedule} them with respect to real-time constraints into a multicore RTS.
 
+\paragraph{Related and Complementary Work.}
+
+There exists some work
+\cite{xie2007improving,lin2009static,lesi2017network,lesi2017security,sg1,sg2,sibin_RT_security_journal} on reconciling the addition of
+security mechanisms into RTS. However, they are designed for single core platforms only, and unlike ours, they require modification of the existing real-time tasks. Researchers also proposed architectural frameworks~\cite{securecore, securecore_memory, securecore_syscal, mohan_s3a, slack_cornell, mhasan_resecure_iot} that use hardware/software mechanisms to
+protect against security vulnerabilities. However, those frameworks require custom hardware-support for monitoring, and hence not suitable for legacy or off-the-shelf systems. Integrating monitoring and detection tasks for multicore RTS without custom hardware support is an open research problem. 
 
 
 \paragraph{Adversary Model.}
