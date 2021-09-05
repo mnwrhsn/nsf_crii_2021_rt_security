@@ -12,23 +12,26 @@ to test with a more diverse set of real-time task parameters to explore the desi
 
 
 
+
 \paragraph{System Integration and Benchmarks.} We will integrate our proposed ideas into \textit{two real-time kernels} (RT\_PREEMPT~\cite{rt_patch} and LITMUS\textsuperscript{RT}~\cite{litmus_rt}) and use OP-TEE~\cite{optee} as our secure enclave. We will develop kernel patches and evaluate them on both x86 (UP Extreme~\cite{up_extreme}) and ARM (Raspberry Pi~\cite{rpi4}) embedded hardware platforms. We will use existing intrusion detection tools such as Tripwire~\cite{tripwire}, AIDE~\cite{aide}, and Bro~\cite{bro} as security tasks. Further, we will evaluate the efficacy of our scheduler implementations using \textit{three embedded benchmark suites}: PapaBench~\cite{nemer2006papabench}, MiBench~\cite{guthaus2001mibench},  and MultiBench~\cite{eembc_multibench}. These tools and benchmarks will enable us to evaluate the performance of models with realistic workloads. We will use \textit{multiple performance indicators} (such as context switch and memory overheads, scheduling delays) to evaluate the trade-offs of integrating security into existing real-time schedulers.
 
 
-\begin{wrapfigure}{r}{0.320\textwidth}
+\begin{wrapfigure}{r}{0.420\textwidth}
 	\centering
 	%	\vspace*{-0.5\baselineskip}
-	\hspace*{-0.5em}
+%	\hspace*{-1.5em}
 	\includegraphics[scale=0.11]{piborg}
+	\hspace*{1em}
 	\includegraphics[scale=0.090]{robot_arm}
-%	\includegraphics[scale=0.08]{testbed_piborg}
-%	\includegraphics[scale=0.08]{testbed_robot_arm}
-%	\includegraphics[scale=0.09]{piborg_2_png}
-%	\includegraphics[scale=0.070]{robot_arm_2_png}
+	%	\includegraphics[scale=0.08]{testbed_piborg}
+	%	\includegraphics[scale=0.08]{testbed_robot_arm}
+	%	\includegraphics[scale=0.09]{piborg_2_png}
+	%	\includegraphics[scale=0.070]{robot_arm_2_png}
 	\caption{Off-the-shelf testbeds: \ca multi-terrain rover (left) and \cb six-degree-of-freedom robotic arm (right).}
 	\label{fig:demo_sys}
 	\vspace*{-0.2\baselineskip}
 \end{wrapfigure}
+
 
 \paragraph{Demonstrative Platforms.} While our simulation-based studies focus on the scalability of the algorithms, we also aim to analyze the feasibility of our ideas in realistic environments. We will evaluate our ideas on \textit{two off-the-shelf cyber-physical platforms} (see Figure~\ref{fig:demo_sys}): \ca a multi-terrain ground rover (MonsterBorg~\cite{monsterborg}) and \cb a six-degree-of-freedom robotic arm (ROT3U~\cite{robot_arm_rot3u}). Our implementations will demonstrate the feasibility of security integration techniques on wide range of use-cases such as remote surveillance, home automation, and smart manufacturing. 
 

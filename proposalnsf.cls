@@ -46,7 +46,10 @@
 
 \RequirePackage[letterpaper,top=1in,bottom=1in,left=1in,right=1in]{geometry}
 
-\RequirePackage[format=plain,indention=.6cm, font=scriptsize, labelfont=bf]{caption}
+\RequirePackage[format=plain,indention=.6cm, 
+%font=scriptsize, 
+font=small, 
+labelfont=bf]{caption}
 \RequirePackage{fancyhdr}
 
 
@@ -111,4 +114,4 @@
 %  \makeatother%
 %}
 
-\renewcommand{\baselinestretch}{1.1}
+\renewcommand{\baselinestretch}{1.085}
