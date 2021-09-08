@@ -87,15 +87,14 @@ case, then the task set is deemed to be \textit{``schedulable''} and the system,
 \paragraph{Related and Complementary Work.}
 
 Enhancing security in real-time applications is an active research area (see the related surveys~\cite{mhasan_rtiot_sensors19,chai2019short}). There exists some work
-\cite{xie2007improving,lin2009static,lesi2017network,lesi2017security,sg1,sg2,sibin_RT_security_journal, zhang2013design, jiang2013optimization, taskshuffler, mhasan_reorder_tech_report, schedguard_rtas21} on reconciling the addition of
+\cite{xie2007improving,lin2009static,lesi2017network,lesi2017security,sg1,sg2,sibin_RT_security_journal, zhang2013design, jiang2013optimization, taskshuffler, mhasan_reorder_tech_report, hamad2018prediction, schedguard_rtas21} on reconciling the addition of
 security mechanisms into RTS. However, they are designed for single core platforms only, and unlike ours, they require modification of the existing real-time tasks. Researchers also proposed architectural frameworks~\cite{securecore, securecore_memory, securecore_syscal, mohan_s3a, slack_cornell, mhasan_resecure_iot} that use hardware/software mechanisms to
 protect against security vulnerabilities. However, those frameworks require custom hardware-support for monitoring, and hence not suitable for legacy or off-the-shelf systems. Integrating monitoring and detection tasks for multicore RTS without custom hardware support is an open research problem. There also exist large number of work for generic cyber-physical/Internet-of-things-specific embedded systems (too many to enumerate here, refer to  the related surveys%~\cite{ammar2018internet, trustzone_survey}) 
 ~\cite{cps_security_sruvey_iot,yang2017survey, ammar2018internet, trustzone_survey, trustzone_survey_2}) 
 --- however the consideration of real-time security aspects distinguish proposed work from other research. 
 
 
-
-\section{Integrating Monitoring and Detection}
+\section{Integrating Monitoring and Detection} \label{sec:prior_work}
 
 %\paragraph{Considerations for Integrating Security Tasks.}  
 
@@ -118,7 +117,7 @@ However, the scheduling policy needs to ensure that the system remains secure wi
 %Unlike single core systems, integrating security into multicore platforms is more challenging since designers have multiple choices across cores to retrofit security mechanisms. 
 
 One may wonder why we cannot schedule the security tasks in the same way that the existing real-time tasks are scheduled. However, without careful schedulability
-analysis if we set arbitrary high-priority or small inter-arrival duration, this may violate timing constraints for the critical real-time tasks --- thus the main safety requirements of the system will be threatened.  Unlike single core systems, integrating security into multicore platforms is more challenging since the designers now have multiple choices for where to allocate the security tasks. For instance, should the engineers: 
+analysis if we set arbitrary high-priority or small inter-arrival duration, this may violate timing constraints for the critical real-time tasks --- thus the main safety requirements of the system will be threatened~\cite{sibin_deeply}.  Unlike single core systems, integrating security into multicore platforms is more challenging since the designers now have multiple choices for where to allocate the security tasks. For instance, should the engineers: 
 \ci \textit{dedicate a core} to all the security tasks; or 
 \cii \textit{spread the security tasks to all cores} (in conjunction with the real-time tasks) and if so, how to determine the \textit{task-to-core assignment}? or \ciii \textit{execute them continuously} across any available core? In addition, how the designers can \textit{determine the monitoring frequency of security tasks}? How do we develop a \textit{reactive framework that dynamically adjust security tasks into available cores for better responsiveness upon suspicion of a security breach?} These are themselves critical research challenges that need to be investigated.
 
@@ -166,7 +165,7 @@ The PI's dissertation work~\cite{mhasan_rtss16, mhasan_ecrts17, mhasan_date18, m
 %routines with a frequency closer to the desired one while respecting the
 %temporal constraints of the other real-time tasks.
 In early work~\cite{mhasan_rtss16} we introduce a technique that allows the execution of security tasks \textit{``opportunistically'' with lowest-priority} in conjunction with real-time
-tasks (so that they do not interfere the execution order of real-time tasks), while keeping the best possible periods for the security tasks. However, if the security tasks always execute with lowest priority, they suffer more interference (i.e., preemption from high-priority real-time tasks) and the longer detection time (due to poor response time) will make the security mechanisms less effective. In order to provide better responsiveness and increase the effectiveness of monitoring and detection mechanisms, we then propose a \textit{dual-mode framework}~\cite{mhasan_ecrts17}
+tasks (so that they do not interfere the execution order of real-time tasks), while keeping the best possible periods (\ie monitoring frequency) for the security tasks. However, if the security tasks always execute with lowest priority, they suffer more interference (i.e., preemption from high-priority real-time tasks) and the longer detection time (due to poor response time) will make the security mechanisms less effective. In order to provide better responsiveness and increase the effectiveness of monitoring and detection mechanisms, we then propose a \textit{dual-mode framework}~\cite{mhasan_ecrts17}
 %For the most part, CONTEGO executes in a PASSIVE mode (i.e., with opportunistic execution of intrusion detection tasks). However, CONTEGO will switch to an ACTIVE mode of operation to perform additional checks as needed (e.g., fine-grained analysis, used as an example in Section 4.7.2). This ACTIVE mode potentially executes with higher priority, while ensuring the timing guarantees of real-time tasks.
  %I then propose a dual-mode model (named CONTEGO) 
  that allows the security tasks to execute in two different modes: \ca by default security tasks execute opportunistically when the system is deemed to be uncompromised (PASSIVE mode); \cb if an anomaly is suspected, the security tasks may switch to higher priority (while ensuring the timing guarantees of real-time tasks) to perform additional checks as needed (ACTIVE mode); \cc the system reverts to PASSIVE mode if: \ci no anomalous activity is found or \cii the root cause of the problem is detected and malicious entities are removed. We also devise a \textit{metric} (called \textit{``tightness of monitoring''}) that allows us to execute security tasks with a frequency closer to what the designers' expect and provides us one way to trade-off security with schedulability. 

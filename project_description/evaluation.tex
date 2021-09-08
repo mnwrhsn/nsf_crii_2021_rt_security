@@ -16,13 +16,13 @@ to test with a more diverse set of real-time task parameters to explore the desi
 \paragraph{System Integration and Benchmarks.} We will integrate our proposed ideas into \textit{two real-time kernels} (RT\_PREEMPT~\cite{rt_patch} and LITMUS\textsuperscript{RT}~\cite{litmus_rt}) and use OP-TEE~\cite{optee} as our secure enclave. We will develop kernel patches and evaluate them on both x86 (UP Extreme~\cite{up_extreme}) and ARM (Raspberry Pi~\cite{rpi4}) embedded hardware platforms. We will use existing intrusion detection tools such as Tripwire~\cite{tripwire}, AIDE~\cite{aide}, and Bro~\cite{bro} as security tasks. Further, we will evaluate the efficacy of our scheduler implementations using \textit{three embedded benchmark suites}: PapaBench~\cite{nemer2006papabench}, MiBench~\cite{guthaus2001mibench},  and MultiBench~\cite{eembc_multibench}. These tools and benchmarks will enable us to evaluate the performance of models with realistic workloads. We will use \textit{multiple performance indicators} (such as context switch and memory overheads, scheduling delays) to evaluate the trade-offs of integrating security into existing real-time schedulers.
 
 
-\begin{wrapfigure}{r}{0.420\textwidth}
+\begin{wrapfigure}{r}{0.350\textwidth}
 	\centering
-	%	\vspace*{-0.5\baselineskip}
+		\vspace*{-0.3\baselineskip}
 %	\hspace*{-1.5em}
-	\includegraphics[scale=0.11]{piborg}
+	\includegraphics[scale=0.10]{piborg}
 	\hspace*{1em}
-	\includegraphics[scale=0.090]{robot_arm}
+	\includegraphics[scale=0.085]{robot_arm}
 	%	\includegraphics[scale=0.08]{testbed_piborg}
 	%	\includegraphics[scale=0.08]{testbed_robot_arm}
 	%	\includegraphics[scale=0.09]{piborg_2_png}

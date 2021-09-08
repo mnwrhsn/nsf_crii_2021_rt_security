@@ -114,4 +114,4 @@ labelfont=bf]{caption}
 %  \makeatother%
 %}
 
-\renewcommand{\baselinestretch}{1.085}
+\renewcommand{\baselinestretch}{1.0730}
