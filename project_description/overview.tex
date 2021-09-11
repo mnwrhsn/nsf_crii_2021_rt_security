@@ -48,8 +48,8 @@ protect against security vulnerabilities. However, those frameworks require cust
 
 
 
-\paragraph{Real-Time Systems.} 
-RTS are defined by their substantial timing requirements. Some of the common properties and assumptions related to RTS are as follows: 
+\paragraph{Real-Time Systems (RTS).} 
+Embedded cyber-physical systems with real-time properties are defined by their substantial timing requirements. Some of the common properties and assumptions related to RTS are as follows: 
 \ca implemented as a system of periodic tasks, 
 \cb worst-case bounds are known for most loops as well as the critical pieces of code, 
 %\ciii no dynamically loaded or self-modifying code, 
@@ -88,7 +88,7 @@ case, then the task set is deemed to be \textit{``schedulable''} and the system,
 
 Enhancing security in real-time applications is an active research area (see the related surveys~\cite{mhasan_rtiot_sensors19,chai2019short}). There exists some work
 \cite{xie2007improving,lin2009static,lesi2017network,lesi2017security,sg1,sg2,sibin_RT_security_journal, zhang2013design, jiang2013optimization, taskshuffler, mhasan_reorder_tech_report, hamad2018prediction, schedguard_rtas21} on reconciling the addition of
-security mechanisms into RTS. However, they are designed for single core platforms only, and unlike ours, they require modification of the existing real-time tasks. Researchers also proposed architectural frameworks~\cite{securecore, securecore_memory, securecore_syscal, mohan_s3a, slack_cornell, mhasan_resecure_iot} that use hardware/software mechanisms to
+security mechanisms into RTS. However, they are designed for single-core platforms only, and unlike ours, they require modification of the existing real-time tasks. Researchers also proposed architectural frameworks~\cite{securecore, securecore_memory, securecore_syscal, mohan_s3a, slack_cornell, mhasan_resecure_iot} that use hardware/software mechanisms to
 protect against security vulnerabilities. However, those frameworks require custom hardware support for monitoring, and hence not suitable for legacy or off-the-shelf systems. Integrating monitoring and detection tasks for multicore RTS without custom hardware support is an open research problem. There also exist large number of work for generic cyber-physical/Internet-of-things-specific embedded systems (too many to enumerate here, refer to  the related surveys%~\cite{ammar2018internet, trustzone_survey}) 
 ~\cite{cps_security_sruvey_iot,yang2017survey, ammar2018internet, trustzone_survey, trustzone_survey_2}) 
 --- however, considering real-time security aspects distinguishes proposed work from other research. 
@@ -117,7 +117,7 @@ However, the scheduling policy must ensure that the system remains secure withou
 %Unlike single core systems, integrating security into multicore platforms is more challenging since designers have multiple choices across cores to retrofit security mechanisms. 
 
 One may wonder why we cannot schedule the security tasks in the same way that the existing real-time tasks are scheduled. However, without careful schedulability
-analysis if we set arbitrary high-priority or small inter-arrival duration, this may violate timing constraints for the critical real-time tasks --- thus the main safety requirements of the system will be threatened~\cite{sibin_deeply}.  Unlike single core systems, integrating security into multicore platforms is more challenging since the designers now have multiple choices for allocating the security tasks. For instance, should the engineers: 
+analysis if we set arbitrary high-priority or small inter-arrival duration, this may violate timing constraints for the critical real-time tasks --- thus the main safety requirements of the system will be threatened~\cite{sibin_deeply}.  Unlike single-core systems, integrating security into multicore platforms is more challenging since the designers now have multiple choices for allocating the security tasks. For instance, should the engineers: 
 \ci \textit{dedicate a core} to all the security tasks; or 
 \cii \textit{spread the security tasks to all cores} (in conjunction with the real-time tasks) and if so, how to determine the \textit{task-to-core assignment}? or \ciii \textit{execute them continuously} across any available core? In addition, how can the designers \textit{determine the monitoring frequency of security tasks}? How do we develop a \textit{reactive framework that dynamically adjusts security tasks into available cores for better responsiveness upon suspicion of a security breach?} These are themselves critical research challenges that need to be investigated.
 
@@ -181,7 +181,7 @@ tasks (so that they do not interfere with the execution order of real-time tasks
 %Chapter~\ref{ch:hydra-c} addresses aforementioned issues. 
 
 
-The above frameworks are designed for single core platforms. In the follow-up work~\cite{mhasan_date18} we first develop
+The above frameworks are designed for single-core platforms. In the follow-up work~\cite{mhasan_date18}, we first develop
 a low-complexity iterative solution that
 jointly finds the security tasks’ periods and core assignments where the security tasks are \textit{statically assigned} across all available cores. 
 %I compare \coolnameplus with another scheme that allocates a dedicated core for security tasks while the real-time tasks are assigned to the remaining cores. I find out on average, \coolnameplus can provide 27.23\% faster intrusion detection rate (on a quad core system) when compared to the other scheme. 
