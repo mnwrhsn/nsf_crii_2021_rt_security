@@ -15,15 +15,15 @@
 
 Embedded real-time systems (RTS) are all around us --- they are used to monitor and control physical systems and processes in various domains such as unmanned vehicles, self-driving cars, critical infrastructures, manufacturing systems, medical devices to name but a few.
 %Manned and unmanned vehicles, self driving cars, critical infrastructures such as the electric grid, oil and gas pipelines and water systems, process control systems in industrial plants are just a few examples of systems and infrastructure that rely on embedded RTS. 
-Until recently, security was not an important concern in the design of
-such systems since they used proprietary protocols, platforms and software,
-and were not connected to the outside world. Recent attacks though have shown that
-such critical systems are vulnerable to malicious attacks, and it can result in serious  damage to humans, the systems as well the environment. Integrating
-security in such systems is not an easy task since RTS have stringent timing and safety constraints --- hence, a security mechanism must not violate these requirements. There has also been a lot of interest in using multicore processors in RTS and these open up interesting security challenges as well. This proposal will
+Until recently, security was not an essential concern in the design of
+such systems since they used proprietary protocols, platforms, and software,
+and were not connected to the outside world. Recent attacks have shown that
+such critical systems are vulnerable to malicious attacks, and such adversarial actions can result in severe  damage to humans, the systems, and the environment. Integrating
+security in such systems is not an easy task since RTS have stringent timing and safety constraints --- hence, a security mechanism must not violate these requirements. There has also been a lot of interest in using multicore processors in RTS, opening up pressing security challenges. Hence the focus of this proposal is to
 \ca study and develop frameworks for integrating security into RTS built using multicore processors, \cb  
 investigate the various parameters that affect design choices while integrating security into multicore RTS, and \cc devise metrics that will enable the designers to measure success and objectively analyze different solutions. 
 %The focus will be on the unique challenges faced by the use of multicore-based off-the-shelf systems. 
-The proposed techniques will be evaluated on a variety of platforms --- from simulation engines to real hardware (automated rovers and a scale-down robot testbed).
+The proposed techniques will be evaluated on various platforms --- from simulation engines to real hardware (automated rovers and a scale-down robot testbed).
 
 \vspace*{1em}
 \noindent {\large \textbf{Intellectual Merit}}
@@ -33,10 +33,10 @@ The proposed techniques will be evaluated on a variety of platforms --- from sim
 
 
 %Integrating security into RTS is not an easy task especially considering the stringent constraints placed on such systems to ensure safety. 
-This proposal addresses a fundamentally challenging problem, i.e., how do we integrate security monitoring techniques into RTS without affecting timing requirements? The focus of this research is to develop techniques that will allow us to trade back and forth between these, seemingly, conflicting properties so that designers of the systems can correctly gauge system requirements —-- hence, perhaps, meeting both, the real-time constraints as well as integrating effective security mechanisms.  The proposed work will bridge the knowledge gap by analyzing the trade-offs between the two requirements --- whether reducing the promises made to one (say a reduction of the security goals) will result in improvements for the other (better real-time guarantees). 
+This proposal addresses a fundamentally challenging problem, \ie how do we integrate security monitoring techniques into RTS without affecting timing requirements? The focus of this research is to develop strategies that will allow us to trade back and forth between these, seemingly, conflicting properties so that designers of the systems can correctly gauge system requirements —-- hence, perhaps, meeting both, the real-time constraints as well as integrating effective security mechanisms.  The proposed work will bridge the knowledge gap by analyzing the trade-offs between the two requirements --- whether reducing the promises made to one (say a reduction of the security goals) will improve the other (better real-time guarantees). 
 %The outcomes of this work will enable researchers and system engineers
  Designers of such systems will then have the ability 
- to make well-informed choices and develop systems that are inherently safer and more secure.
+ to make well-informed choices and develop inherently safer and more secure systems.
 
 %Security breaches in RTS could result in safety violations.  Hence, understanding how to  reconcile these two potentially contradicting requirements (real-time vs security) is critical. Our research will analyze the trade-offs between the two requirements --- whether reducing the promises made to one (say a reduction of the security goals) will result in improvements for the other (better real-time guarantees). Designers of such systems will then have the ability to make well-informed choices and develop systems that are inherently safer and more secure. An  understanding  of  the  interplay  between real-time constraints and the security requirements is very important for properly integrating the two fields.  
 
@@ -61,8 +61,8 @@ This proposal addresses a fundamentally challenging problem, i.e., how do we int
 
 \noindent
 
-The proposed research has far-reaching societal, scientific, and educational impacts. The development of analysis techniques and system-level frameworks proposed in this work will inherently make critical systems of modern society (such as aircraft, automobiles, power grid, unmanned vehicles, satellites, manufacturing plants, industrial control systems, medical devices, and critical infrastructures) more secure, and hence, safer. The proposed work can lead to substantial improvements in consumer cyber-physical products and improve systems that have national security considerations.  The proposed educational and outreach activities are expected to have a broad and positive societal impact by training a qualified, diverse workforce. 
-Specifically, the education efforts include \ca development of a new senior undergraduate/graduate-level course on Real-Time Systems and \cb enhancement of existing Introduction to Cybersecurity course with advanced topics on real-time scheduling and security as well as results generated from this research. 
+The proposed research has far-reaching societal, scientific, and educational impacts. The development of analysis techniques and system-level frameworks proposed in this work will inherently make critical systems of modern society (such as aircraft, automobiles, power grid, unmanned vehicles, satellites, manufacturing plants, industrial control systems, medical devices, and critical infrastructures) more secure, and hence, safer. The proposed work can lead to substantial improvements in consumer cyber-physical products and improve systems that have national security considerations.  The proposed educational and outreach activities will have a broad and positive societal impact by training a qualified, diverse workforce. 
+Specifically, the education efforts include \ca development of a new senior undergraduate/graduate-level course on Real-Time Systems and \cb enhancement of existing Introduction to Cybersecurity course with advanced topics on real-time security as well as results generated from this research. 
 %Specifically, the education efforts include: \ca development of a new senior undergraduate/graduate-level course on Real-Time Systems and \cb enhancement of existing Real-Time System Security (recently introduced by the PI in Spring 2021) and Operating System courses with advanced topics on real-time scheduling/security as well as results generated from this research. 
 The PI will also actively work on broadening participation in computing by \ca providing research opportunities for the students from underrepresented communities through the Wichita State's Shocker Engineering Academy (SEA) program, 
 %--- an NSF supported minority participation program (KS-LSAMP), 
