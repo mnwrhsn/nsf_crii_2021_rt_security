@@ -60,7 +60,10 @@ period adaptation. But how do we know that this trade-off framework works well i
 practice? How do we know the efficient design choices (say  core-to-task assign strategy)? What are the \textit{right metrics}
 to measure the performance of the multicore system? We need a way to measure the system
 performance and a systematic way of exploring the design-space.    While \textit{time-to-detect} is a valuable metric, it is hard to quantify comprehensively as it depends on several factors (such as the efficacy
-of monitoring tasks, the kind of intrusion) and is a lagging metric. Apart from security metrics, it is also necessary to understand the impact of adding security on real-time timing properties to verify that the system functionality has not been impaired.  For instance, albeit for a limited time, the dynamic mode switching may reduce utilization (especially for some low-priority real-time tasks in the ACTIVE mode). Hence, this \textit{difference in utilization} can be used as a metric to measure the cost of security. Identifying and designing better metrics is an important and challenging problem. We will undertake it in the narrow context of integrating monitoring and detection tasks into multicore RTS.  
+of monitoring tasks, the kind of intrusion) and is a lagging metric. Apart from security metrics, it is also necessary to understand the impact of adding security on real-time timing properties to verify that the system functionality has not been impaired.  For instance, albeit for a limited time, the dynamic mode switching may reduce utilization (especially for some low-priority real-time tasks in the ACTIVE mode). Hence, this \textit{difference in utilization} can be used as a metric to measure the cost of security. Identifying and designing better metrics is an important and challenging problem. 
+ We will undertake it in the narrow context of integrating security tasks into multicore RTS.  
+
+%We will undertake it in the narrow context of integrating monitoring and detection tasks into multicore RTS.  
 
 
 
@@ -86,7 +89,7 @@ Our schedulability tests, scheduler plugins, and OS-level mechanisms will ensure
 
 
 
-%\vspace*{0.2em}
+\vspace*{0.2em}
 \begin{mdframed}[backgroundcolor=gray!10]
 \vspace{-1.2em}
 \hfill{}\fcolorbox{black}{gray!30}{\bf Research Tasks}\hfill{}
@@ -94,7 +97,7 @@ Our schedulability tests, scheduler plugins, and OS-level mechanisms will ensure
 \begin{itemize}[leftmargin=*]
 	\parskip 0pt
 	\itemsep 0pt
-	\item \rtask Extend multi-mode framework for multicore RTS --- this includes: \ca design-space exploration of multiple mode-switch alternatives, \cb integrate with RTOS and multicore schedulers, and \cc analyze the efficacy of each of the techniques.
+	\item \rtask Extend multi-mode framework for multicore RTS --- this includes: \ca design-space exploration of multiple mode-switch alternatives, \cb integrate with multicore RTOS schedulers, and \cc analyze the efficacy of each of the techniques.
 	\item \rtask Design frameworks for methodically integrating reactive monitoring and detection mechanisms for multi-core RTS with non-preemptive execution and precedence constraints.
 	\item \rtask ~\ca Explore different performance metrics and evaluate their efficacy;~\cb Study whether new metrics can provide additional real-time/security insights.
 %	\item \rtask Blah
