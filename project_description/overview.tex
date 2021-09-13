@@ -69,7 +69,7 @@ and $D_i$ is the timing constraint (deadline).
 %and temporal constraints (deadlines).
 In multicore systems, task scheduling can be viewed as solving an allocation problem 
 %(\ie on which processor a task should execute) 
-depending on design criteria such as~\cite{mutiprocessor_survey}: \ca \textit{no migration} (tasks are allocated to a fixed core), \cb \textit{task-level migration} (the jobs of a task may execute on different cores), and \cc \textit{job-level migration} (the jobs of a task migrate to and execute on different core although parallel execution of a job is not permitted). Schedulability tests\cite{res_time_1, res_time_rts,  bini2004schedulability,mutiprocessor_survey} are used to determine
+depending on design criteria such as~\cite{mutiprocessor_survey}: \ca \textit{no migration} (tasks are allocated to a fixed core), \cb \textit{task-level migration} (the jobs of a task may execute on different cores), and \cc \textit{job-level migration} (the jobs of a task migrate to and execute on different core although parallel execution of a job is not permitted). \textit{Schedulability tests}~\cite{res_time_1, res_time_rts,  bini2004schedulability,mutiprocessor_survey} are used to determine
 if all tasks in the system meet their respective deadlines. If this is the
 case, then the task set is deemed to be \textit{``schedulable''} and the system, \textit{safe}.
 
